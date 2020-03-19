@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8"/>
+
+</head>
+
+<body>
+
+
+
+	<h1>Template</h1>
+
+  
+
+	<p>This is a blank template for a web page.</p>
+
+  
+	<script>
+        const choice = ["rock", "paper", "scissors"];
+		
+		function computerPlay () {
+			return computerSign = choice[(Math.floor(Math.random()*choice.length))];
+		}
+		
+		function humanPlay () {
+			let humanSign = prompt ("Please choose your sign", "rock, paper or scissors").toLowerCase();
+			if (choice.includes(humanSign)) {
+				return humanSign;
+			} else {
+				alert("Not valid choice, please try again!");
+				humanPlay();
+			}
+		}
+		
+		function winnerCalc (computer, human) {
+			if (computer == human) {
+				return 0;
+			} else {
+				switch (computer) {
+					case "rock":
+						if (human == "paper"){
+							return 1;
+						} else {
+							return -1;
+						}
+						break;
+					case "paper":
+						if (human == "scissors") {
+							return 1;
+						} else {
+							return -1;
+						}
+						break;
+					case "scissors":
+						if (human == "rock") {
+							return 1;
+						} else {
+							return -1;
+						}
+						break;
+				}
+			}
+		}
+		
+		function playRound () {
+			let computerSelection = computerPlay();
+			let humanSelection = humanPlay();
+			let roundWinner = winnerCalc (computerSelection, humanSelection);
+			switch (roundWinner) {
+				case 0:
+					alert("Same sign");
+					return 0;
+					break;
+				case 1:
+					alert("You win!");
+					return 1;
+					break;
+				case -1:
+					alert("Computer win!");
+					return -1;
+					break;
+			}
+		} 
+		function game () {
+			let scoreComputer = 0;
+			let scoreHuman = 0;
+			let i = 1;
+			let result = undefined;
+			while (i <= 5) {
+				result = playRound();
+				if (result == -1) {
+					scoreComputer++;
+					i++;
+					console.log("Computer score incremented: "+scoreComputer);
+				} else if (result == 1) {
+					scoreHuman++;
+					i++;
+					console.log("Human score incremented: "+scoreHuman);
+				}
+			}
+			if (scoreComputer > scoreHuman) {
+				alert(`You lose! Computer ${scoreComputer}:${scoreHuman} Player`);
+			} else if (scoreHuman > scoreComputer) {
+				alert(`You win! Computer ${scoreComputer}:${scoreHuman} Player`);
+			} else {
+				alert(`It is a draw! Computer ${scoreComputer}:${scoreHuman} Player`);
+			}
+		}
+		game();
+	</script>
+</body>
+
+</html>
